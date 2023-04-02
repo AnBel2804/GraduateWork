@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "QWFW4swmd/+utaYCHYSR5xtDO6s9/MVAtRx3z6sPTTTemZK0wktKlvbqB8zqy3+jvFyG1mjEDMI4w7bK0lOmOA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Andrey Belov\\Desktop\\Учёба\\ДИПЛОМ\\Project\\Graduate Work\\Graduate Work\\Graduate Work.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Andrey Belov\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512"
+  ],
+  "logs": []
+}

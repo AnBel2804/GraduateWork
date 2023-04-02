@@ -1,0 +1,22 @@
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\bin\Debug\net6.0\appsettings.json
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\bin\Debug\net6.0\Graduate Work.staticwebassets.runtime.json
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\bin\Debug\net6.0\Graduate Work.exe
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\bin\Debug\net6.0\Graduate Work.deps.json
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\bin\Debug\net6.0\Graduate Work.runtimeconfig.json
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\bin\Debug\net6.0\Graduate Work.dll
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\bin\Debug\net6.0\Graduate Work.pdb
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\obj\Debug\net6.0\Graduate Work.csproj.AssemblyReference.cache
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\obj\Debug\net6.0\Graduate Work.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\obj\Debug\net6.0\Graduate Work.AssemblyInfoInputs.cache
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\obj\Debug\net6.0\Graduate Work.AssemblyInfo.cs
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\obj\Debug\net6.0\Graduate Work.csproj.CoreCompileInputs.cache
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\obj\Debug\net6.0\Graduate Work.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\obj\Debug\net6.0\scopedcss\bundle\Graduate Work.styles.css
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\obj\Debug\net6.0\Graduate Work.dll
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\obj\Debug\net6.0\refint\Graduate Work.dll
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\obj\Debug\net6.0\Graduate Work.pdb
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\obj\Debug\net6.0\Graduate Work.genruntimeconfig.cache
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\obj\Debug\net6.0\ref\Graduate Work.dll
