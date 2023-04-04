@@ -1,3 +1,7 @@
+using Graduate_Work.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 namespace Graduate_Work
 {
     public class Program
@@ -8,6 +12,10 @@ namespace Graduate_Work
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+                builder.Configuration.GetConnectionString("DefaultConnection")
+                ));
 
             var app = builder.Build();
 
