@@ -307,3 +307,6 @@ C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Grad
 C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\bin\Debug\net6.0\NHibernate.dll
 C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\bin\Debug\net6.0\Remotion.Linq.dll
 C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\bin\Debug\net6.0\Remotion.Linq.EagerFetching.dll
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\bin\Debug\net6.0\Microsoft.VisualStudio.Web.CodeGeneration.dll
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\bin\Debug\net6.0\dotnet-aspnet-codegenerator-design.dll
+C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work\bin\Debug\net6.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
