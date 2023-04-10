@@ -1,4 +1,4 @@
-﻿namespace Graduate_Work.DbInitializer.IDbInitializer
+﻿namespace Graduate_Work.DbInitializer
 {
     public interface IDbInitializer
     {

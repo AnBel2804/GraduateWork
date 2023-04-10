@@ -1,7 +1,6 @@
 ﻿using Graduate_Work.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Graduate_Work.DbInitializer.IDbInitializer;
 using Graduate_Work.Utility;
 
 namespace Graduate_Work.DbInitializer
