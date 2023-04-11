@@ -56,3 +56,20 @@ body {
     line-height: 60px;
 }
 
+.search-block-location{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.title-style {
+    text-align: center;
+    font-family: 'Sans Serif Collection';
+    font-style: italic;
+    font-size: 30px;
+}
+
+.text-style {
+    font-family: 'Sans Serif Collection';
+    font-style: normal;
+    font-size: 140%;
+}
