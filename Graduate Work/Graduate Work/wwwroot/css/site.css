@@ -56,9 +56,16 @@ body {
     line-height: 60px;
 }
 
-.search-block-location{
+.form-block-location{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+}
+
+.form-block-buttons-location {
+    margin-left: 5%;
+    margin-right: 5%;
+    display: grid;
+    grid-template-columns: 0.3fr 0.7fr;
 }
 
 .title-style {

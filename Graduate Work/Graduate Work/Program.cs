@@ -4,6 +4,7 @@ using Graduate_Work.Repository.IRepository;
 using Graduate_Work.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Google.Protobuf.WellKnownTypes;
 
 namespace Graduate_Work
 {
@@ -46,7 +47,7 @@ namespace Graduate_Work
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            SeedDB();
             app.UseAuthorization();
 
             app.MapControllerRoute(
@@ -54,6 +55,15 @@ namespace Graduate_Work
                 pattern: "{area=User}/{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+
+            void SeedDB()
+            {
+                using (var scope = app.Services.CreateScope())
+                {
+                    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+                    dbInitializer.Initialize();
+                }
+            }
         }
     }
 }
