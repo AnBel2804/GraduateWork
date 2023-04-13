@@ -31,7 +31,7 @@ namespace Graduate_Work
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = $"/User/Home/Login";
+                options.LoginPath = $"/User/Account/Login";
             });
             builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession(options =>
@@ -49,6 +49,7 @@ namespace Graduate_Work
             app.UseRouting();
             SeedDB();
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.MapControllerRoute(
                 name: "default",

@@ -1,4 +1,4 @@
-﻿ @inject SignInManager<IdentityUser> SignInManager
+﻿@inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
 
@@ -6,15 +6,21 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <form id="infoForm" class="form-inline" asp-area="Customer" asp-controller="Home" asp-action="Index">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Кабінет</button>
-            </form>
+            <label id="manage" class="nav-link text-dark" title="Task">Вітаю @UserManager.GetUserName(User) !</label>
         </li>
-        <li class="nav-item">
-            <form id="infoForm" class="form-inline" asp-area="Customer" asp-controller="Package" asp-action="Index">
+        @if (User.IsInRole(Roles.Role_Customer))
+        {
+            <li class="nav-item">
+                <form id="infoForm" class="form-inline" asp-area="Customer" asp-controller="Home" asp-action="Index">
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Кабінет</button>
+                </form>
+            </li>
+            <li class="nav-item">
+                <form id="infoForm" class="form-inline" asp-area="Customer" asp-controller="Package" asp-action="Index">
                 <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Посилки</button>
-            </form>
-        </li>
+                </form>
+            </li>
+        }
         <li class="nav-item">
             <form id="logoutForm" class="form-inline" asp-area="User" asp-controller="Home" asp-action="Logout">
                 <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Вихід</button>
@@ -24,10 +30,10 @@
     else
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" id="register" asp-area="User" asp-controller="Home" asp-action="Register"> Реєстрація </a>
+            <a class="nav-link text-dark" id="register" asp-area="User" asp-controller="Account" asp-action="Register"> Реєстрація </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" id="login" asp-area="User" asp-controller="Home" asp-action="Login"> Увійти </a>
+            <a class="nav-link text-dark" id="login" asp-area="User" asp-controller="Account" asp-action="Login"> Увійти </a>
         </li>
     }
 </ul>
