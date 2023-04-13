@@ -34,7 +34,6 @@ namespace Graduate_Work.DbInitializer
 
             }
             //create roles if they are not created
-            _roleManager.CreateAsync(new IdentityRole(Roles.Role_User)).GetAwaiter().GetResult();
             _roleManager.CreateAsync(new IdentityRole(Roles.Role_Customer)).GetAwaiter().GetResult();
             _roleManager.CreateAsync(new IdentityRole(Roles.Role_Administrator)).GetAwaiter().GetResult();
             _roleManager.CreateAsync(new IdentityRole(Roles.Role_Moderator)).GetAwaiter().GetResult();

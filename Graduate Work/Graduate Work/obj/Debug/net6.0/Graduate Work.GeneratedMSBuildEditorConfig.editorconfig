@@ -15,6 +15,18 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Andrey Belov\Desktop\Учёба\ДИПЛОМ\Project\Graduate Work\Graduate Work
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Andrey Belov/Desktop/Учёба/ДИПЛОМ/Project/Graduate Work/Graduate Work/Areas/User/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xBY2NvdW50XExvZ2luLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Andrey Belov/Desktop/Учёба/ДИПЛОМ/Project/Graduate Work/Graduate Work/Areas/User/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xBY2NvdW50XFJlZ2lzdGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Andrey Belov/Desktop/Учёба/ДИПЛОМ/Project/Graduate Work/Graduate Work/Areas/User/Views/Account/SuccessRegistration.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xBY2NvdW50XFN1Y2Nlc3NSZWdpc3RyYXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Andrey Belov/Desktop/Учёба/ДИПЛОМ/Project/Graduate Work/Graduate Work/Areas/User/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xIb21lXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
