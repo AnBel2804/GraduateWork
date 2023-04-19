@@ -11,13 +11,26 @@
         @if (User.IsInRole(Roles.Role_Customer))
         {
             <li class="nav-item">
-                <form id="infoForm" class="form-inline" asp-area="Customer" asp-controller="Home" asp-action="Index">
+                <form id="infoForm" class="form-inline" asp-area="Customer" asp-controller="User" asp-action="Index">
                     <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Кабінет</button>
                 </form>
             </li>
             <li class="nav-item">
                 <form id="infoForm" class="form-inline" asp-area="Customer" asp-controller="Package" asp-action="Index">
                 <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Посилки</button>
+                </form>
+            </li>
+        }
+        @if (User.IsInRole(Roles.Role_Moderator))
+        {
+            <li class="nav-item">
+                <form id="infoForm" class="form-inline" asp-area="Moderator" asp-controller="Department" asp-action="Index">
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Відділення</button>
+                </form>
+            </li>
+            <li class="nav-item">
+                <form id="infoForm" class="form-inline" asp-area="Moderator" asp-controller="Route" asp-action="Index">
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Маршрути</button>
                 </form>
             </li>
         }

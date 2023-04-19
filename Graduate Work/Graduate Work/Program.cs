@@ -5,6 +5,7 @@ using Graduate_Work.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Google.Protobuf.WellKnownTypes;
+using Graduate_Work.Utility;
 
 namespace Graduate_Work
 {
@@ -20,11 +21,13 @@ namespace Graduate_Work
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                 builder.Configuration.GetConnectionString("DefaultConnection")
                 ));
+
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts => {
                 opts.Password.RequireNonAlphanumeric = false; // требуются ли не алфавитно-цифровые символы            
             })
-                .AddDefaultTokenProviders()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IDbInitializer, DbInitializer.DbInitializer>();
 
@@ -32,7 +35,7 @@ namespace Graduate_Work
             {
                 options.LoginPath = $"/User/Account/Login";
             });
-            builder.Services.AddDistributedMemoryCache();
+
             builder.Services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(100);
@@ -46,8 +49,10 @@ namespace Graduate_Work
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseSession();
+
             SeedDB();
 
             app.MapControllerRoute(

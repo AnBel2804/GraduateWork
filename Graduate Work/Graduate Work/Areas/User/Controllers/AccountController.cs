@@ -137,7 +137,7 @@ namespace Graduate_Work.Areas.User.Controllers
             if (newUserResponce.Succeeded)
             {
                 await _userManager.AddToRoleAsync(newUser, Utility.Roles.Role_Customer);
-                var customer = new Customer()
+                var customer = new Models.Customer()
                 {
                     User = newUser,
                     FirstName = registerVM.FirstName,
