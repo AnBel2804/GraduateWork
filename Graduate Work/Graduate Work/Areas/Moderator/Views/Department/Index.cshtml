@@ -9,9 +9,7 @@
             <h2 class="text-black text-primary"> Доступні відділення</h2>
         </div>
         <div class="col-6 text-end">
-            <a asp-controller="Department" asp-action="Add" class="btn btn-light">
-                <i class="bi bi-clipboard2-plus"></i> &nbsp; Додати нове відділення
-            </a>
+            <a asp-controller="Department" asp-action="Add" class="btn btn-outline-dark"> &nbsp; Додати нове відділення</a>
         </div>
     </div>
     <br />
@@ -29,6 +27,12 @@
                             <div class="pl-1">
                                 <p class="card-title h5 text-primary text-dark">Місто</p>
                                 <p class="card-title"><b style="word-wrap:break-word;">@item.City</b></p>
+                            </div>
+                            <div style="display:flex;justify-content:center">
+                                <a asp-controller="Department" asp-action="Update" asp-route-id="@item.DepartmentId"
+                                class="btn btn-outline-secondary form-control">Редагувати</a>
+                                &nbsp;<a asp-controller="Department" asp-action="Delete" asp-route-id="@item.DepartmentId"
+                                class="btn btn-outline-danger form-control">Видалити</a>
                             </div>
                         </div>
                     </div>
