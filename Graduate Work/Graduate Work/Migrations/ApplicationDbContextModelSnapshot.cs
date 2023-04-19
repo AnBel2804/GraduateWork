@@ -17,7 +17,7 @@ namespace Graduate_Work.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -29,6 +29,14 @@ namespace Graduate_Work.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -53,8 +61,8 @@ namespace Graduate_Work.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("NumberOfDepartment")
-                        .HasColumnType("float");
+                    b.Property<int>("NumberOfDepartment")
+                        .HasColumnType("int");
 
                     b.Property<int?>("RouteId")
                         .HasColumnType("int");
@@ -97,9 +105,11 @@ namespace Graduate_Work.Migrations
 
                     b.HasIndex("PackageTypeID");
 
-                    b.HasIndex("ReciverInfoId");
+                    b.HasIndex("ReciverInfoId")
+                        .IsUnique();
 
-                    b.HasIndex("SenderInfoId");
+                    b.HasIndex("SenderInfoId")
+                        .IsUnique();
 
                     b.ToTable("Packages");
                 });
@@ -414,15 +424,15 @@ namespace Graduate_Work.Migrations
                         .IsRequired();
 
                     b.HasOne("Graduate_Work.Models.ReciverInfo", "ReciverInfo")
-                        .WithMany()
-                        .HasForeignKey("ReciverInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne()
+                        .HasForeignKey("Graduate_Work.Models.Package", "ReciverInfoId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Graduate_Work.Models.SenderInfo", "SenderInfo")
-                        .WithMany()
-                        .HasForeignKey("SenderInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne()
+                        .HasForeignKey("Graduate_Work.Models.Package", "SenderInfoId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("PackageType");

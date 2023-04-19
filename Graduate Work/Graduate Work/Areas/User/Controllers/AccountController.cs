@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Graduate_Work.Areas.User.Controllers
 {
+    [Area("User")]
     public class AccountController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -77,8 +78,41 @@ namespace Graduate_Work.Areas.User.Controllers
             if (string.IsNullOrEmpty(registerVM.Login))
                 ModelState.AddModelError(nameof(registerVM.Login), "Логін є пустим");
 
+            if (string.IsNullOrEmpty(registerVM.FirstName))
+                ModelState.AddModelError(nameof(registerVM.FirstName), "Ім`я є пустим");
+
+            if (string.IsNullOrEmpty(registerVM.LastName))
+                ModelState.AddModelError(nameof(registerVM.LastName), "Прізвище є пустим");
+
             if (string.IsNullOrEmpty(registerVM.Email))
                 ModelState.AddModelError(nameof(registerVM.Email), "E-mail є пустим");
+
+            if (string.IsNullOrEmpty(registerVM.Password))
+                ModelState.AddModelError(nameof(registerVM.Password), "Пароль є пустим");
+
+            if (string.IsNullOrEmpty(registerVM.ConfirmPassword))
+                ModelState.AddModelError(nameof(registerVM.ConfirmPassword), "Підтвердження паролю є пустим");
+
+            if (!string.IsNullOrEmpty(registerVM.Login) && registerVM.Login.Length < 4)
+                ModelState.AddModelError(nameof(registerVM.Login), "Логін не може бути коротшим за 4 символи");
+
+            if (!string.IsNullOrEmpty(registerVM.Login) && registerVM.Login.Length > 25)
+                ModelState.AddModelError(nameof(registerVM.Login), "Логін не може бути довшим за 25 символів");
+
+            if (!string.IsNullOrEmpty(registerVM.FirstName) && registerVM.FirstName.Length < 4)
+                ModelState.AddModelError(nameof(registerVM.FirstName), "Ім`я не може бути коротшим за 4 символи");
+
+            if (!string.IsNullOrEmpty(registerVM.FirstName) && registerVM.FirstName.Length > 25)
+                ModelState.AddModelError(nameof(registerVM.FirstName), "Ім`я не може бути довшим за 25 символів");
+
+            if (!string.IsNullOrEmpty(registerVM.LastName) && registerVM.LastName.Length < 4)
+                ModelState.AddModelError(nameof(registerVM.LastName), "Прізвище не може бути коротшим за 4 символи");
+
+            if (!string.IsNullOrEmpty(registerVM.LastName) && registerVM.LastName.Length > 25)
+                ModelState.AddModelError(nameof(registerVM.LastName), "Прізвище не може бути довшим за 25 символів");
+
+            if (!string.IsNullOrEmpty(registerVM.Password) && registerVM.Password.Length < 8)
+                ModelState.AddModelError(nameof(registerVM.Password), "Пароль має містити не менше 8 символів");
 
             if (!string.IsNullOrEmpty(registerVM.Email) && !Regex.IsMatch(registerVM.Email, @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"))
                 ModelState.AddModelError(nameof(registerVM.Email), "Невірний формат E-mail");
@@ -86,15 +120,6 @@ namespace Graduate_Work.Areas.User.Controllers
             var user = await _userManager.FindByEmailAsync(registerVM.Email);
             if (!string.IsNullOrEmpty(registerVM.Email) && user != null)
                 ModelState.AddModelError(nameof(registerVM.Email), "Ця пошта вже використовується");
-
-            if (string.IsNullOrEmpty(registerVM.Password))
-                ModelState.AddModelError(nameof(registerVM.Password), "Пароль є пустим");
-
-            if (!string.IsNullOrEmpty(registerVM.Password) && registerVM.Password.Length < 8)
-                ModelState.AddModelError(nameof(registerVM.Password), "Пароль має містити не менше 8 символів");
-
-            if (string.IsNullOrEmpty(registerVM.ConfirmPassword))
-                ModelState.AddModelError(nameof(registerVM.ConfirmPassword), "Підтвердження паролю є пустим");
 
             if (!string.IsNullOrEmpty(registerVM.ConfirmPassword) && registerVM.Password != registerVM.ConfirmPassword)
                 ModelState.AddModelError(nameof(registerVM.ConfirmPassword), "Паролі не співпадають");
@@ -114,7 +139,9 @@ namespace Graduate_Work.Areas.User.Controllers
                 await _userManager.AddToRoleAsync(newUser, Utility.Roles.Role_Customer);
                 var customer = new Customer()
                 {
-                    User = newUser
+                    User = newUser,
+                    FirstName = registerVM.FirstName,
+                    LastName = registerVM.LastName
                 };
                 _unitOfWork.Customer.Add(customer);
                 _unitOfWork.Save();

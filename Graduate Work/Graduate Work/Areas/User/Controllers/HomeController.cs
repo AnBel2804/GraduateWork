@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Graduate_Work.Areas.User.Controllers
 {
+    [Area("User")]
     public class HomeController : Controller
     {
         public IActionResult Index()

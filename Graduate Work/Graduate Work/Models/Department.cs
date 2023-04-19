@@ -9,9 +9,11 @@ namespace Graduate_Work.Models
     {
         [Key]
         public int DepartmentId { get; set; }
-        [Required, Display(Name = "Місто")]
+        [Required(ErrorMessage = "Назва міста є пустою")] 
+        [Display(Name = "Місто")]
         public string City { get; set; }
-        [Required, Display(Name = "Номер відділення")]
-        public double NumberOfDepartment { get; set; }
+        [Required(ErrorMessage = "Номер відділення є пустим")]
+        [Display(Name = "Номер відділення")]
+        public int NumberOfDepartment { get; set; }
     }
 }

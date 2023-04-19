@@ -20,7 +20,6 @@ namespace Graduate_Work
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                 builder.Configuration.GetConnectionString("DefaultConnection")
                 ));
-
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts => {
                 opts.Password.RequireNonAlphanumeric = false; // требуются ли не алфавитно-цифровые символы            
             })
@@ -47,9 +46,9 @@ namespace Graduate_Work
             app.UseStaticFiles();
 
             app.UseRouting();
-            SeedDB();
             app.UseAuthorization();
             app.UseAuthentication();
+            SeedDB();
 
             app.MapControllerRoute(
                 name: "default",

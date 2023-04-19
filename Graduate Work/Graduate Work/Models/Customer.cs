@@ -10,6 +10,8 @@ namespace Graduate_Work.Models
     {
         [Key]
         public int CustomerId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         [ValidateNever]
         [Required]
         public IdentityUser User { get; set; }

@@ -20,7 +20,7 @@ namespace Graduate_Work.DbInitializer
             _roleManager = roleManager;
             _db = db;
         }
-        public void Initialize()
+        public async void Initialize()
         {
             try
             {
@@ -33,10 +33,35 @@ namespace Graduate_Work.DbInitializer
             {
 
             }
-            //create roles if they are not created
-            _roleManager.CreateAsync(new IdentityRole(Roles.Role_Customer)).GetAwaiter().GetResult();
-            _roleManager.CreateAsync(new IdentityRole(Roles.Role_Administrator)).GetAwaiter().GetResult();
-            _roleManager.CreateAsync(new IdentityRole(Roles.Role_Moderator)).GetAwaiter().GetResult();
+
+            if (!_roleManager.RoleExistsAsync(Roles.Role_Customer).GetAwaiter().GetResult())
+            {
+                _roleManager.CreateAsync(new IdentityRole(Roles.Role_Customer)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(Roles.Role_Administrator)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(Roles.Role_Moderator)).GetAwaiter().GetResult();
+
+                IdentityUser moderator = new IdentityUser()
+                {
+                    Email = "moderator@gmail.com",
+                    UserName = "moderator"
+                };
+                var resultModeratorResponce = _userManager.CreateAsync(moderator, "0106Moderator2023").GetAwaiter().GetResult();
+                if (resultModeratorResponce.Succeeded)
+                {
+                    _userManager.AddToRoleAsync(moderator, Roles.Role_Moderator).GetAwaiter().GetResult();
+                }
+
+                IdentityUser administrator = new IdentityUser()
+                {
+                    Email = "administrator@gmail.com",
+                    UserName = "admin"
+                };
+                var resultAdminResponce = _userManager.CreateAsync(administrator, "0106Admin2023").GetAwaiter().GetResult();
+                if (resultAdminResponce.Succeeded)
+                {
+                    _userManager.AddToRoleAsync(moderator, Roles.Role_Administrator).GetAwaiter().GetResult();
+                }
+            }
 
             return;
         }

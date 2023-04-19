@@ -190,6 +190,8 @@ namespace Graduate_Work.Migrations
                 {
                     CustomerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -210,7 +212,7 @@ namespace Graduate_Work.Migrations
                     DepartmentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NumberOfDepartment = table.Column<double>(type: "float", nullable: false),
+                    NumberOfDepartment = table.Column<int>(type: "int", nullable: false),
                     RouteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -296,19 +298,17 @@ namespace Graduate_Work.Migrations
                         column: x => x.PackageTypeID,
                         principalTable: "PackageTypes",
                         principalColumn: "PackageTypeId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Packages_ReciverInfos_ReciverInfoId",
                         column: x => x.ReciverInfoId,
                         principalTable: "ReciverInfos",
-                        principalColumn: "ReciverInfoId",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "ReciverInfoId");
                     table.ForeignKey(
                         name: "FK_Packages_SenderInfos_SenderInfoId",
                         column: x => x.SenderInfoId,
                         principalTable: "SenderInfos",
-                        principalColumn: "SenderInfoId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "SenderInfoId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -368,12 +368,14 @@ namespace Graduate_Work.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Packages_ReciverInfoId",
                 table: "Packages",
-                column: "ReciverInfoId");
+                column: "ReciverInfoId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Packages_SenderInfoId",
                 table: "Packages",
-                column: "SenderInfoId");
+                column: "SenderInfoId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ReciverInfos_DepartmentOfReciverID",
