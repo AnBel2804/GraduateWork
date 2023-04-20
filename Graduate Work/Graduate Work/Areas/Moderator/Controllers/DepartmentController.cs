@@ -72,6 +72,7 @@ namespace Graduate_Work.Areas.Moderator.Controllers
                 TempData["success"] = "Нове відділення успішно додано";
                 return RedirectToAction("Index");
             }
+            TempData["error"] = "Нове відділення не було додано";
             return View(department);
         }
 
@@ -119,6 +120,7 @@ namespace Graduate_Work.Areas.Moderator.Controllers
                 TempData["success"] = "Інформація про відділення успішно відредагована";
                 return RedirectToAction("Index");
             }
+            TempData["error"] = "Інформація про відділення не була відредагована";
             return View(department);
         }
 

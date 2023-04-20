@@ -16,7 +16,6 @@ namespace Graduate_Work.Models
         [Required, Display(Name = "Вартість")]
         public double Cost { get; set; }
         [BindProperty, Display(Name = "Час проходження")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]
         public TimeSpan Time { get; set; }
         public Route()
         {

@@ -4,6 +4,7 @@ using Graduate_Work.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using static Microsoft.AspNetCore.Razor.Language.TagHelperMetadata;
 
 namespace Graduate_Work.Areas.Moderator.Controllers
 {
@@ -86,7 +87,11 @@ namespace Graduate_Work.Areas.Moderator.Controllers
             if (routeVM.Time > maxTime)
                 ModelState.AddModelError(nameof(routeVM.Time), "Час проходження не може бути більшим за 5 днів");
 
-            if (!ModelState.IsValid) return View(routeVM);
+            if (!ModelState.IsValid)
+            {
+                TempData["error"] = "Новий маршрут не було додано";
+                return View(routeVM);
+            }
 
             var department1 = _unitOfWork.Department.GetFirstOrDefault(c => c.NumberOfDepartment == routeVM.NumberOfSendingDepartment);
             var department2 = _unitOfWork.Department.GetFirstOrDefault(c => c.NumberOfDepartment == routeVM.NumberOfReceivingDepartment);
@@ -100,6 +105,60 @@ namespace Graduate_Work.Areas.Moderator.Controllers
             _unitOfWork.Save();
 
             TempData["success"] = "Новий маршрут успішно додано";
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Update(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var routeFromDbFirst = _unitOfWork.Route.GetFirstOrDefault(u => u.RouteId == id);
+            if (routeFromDbFirst == null)
+            {
+                return NotFound();
+            }
+
+            return View(routeFromDbFirst);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(Models.Route route)
+        {
+            TimeSpan maxTime = new TimeSpan(120, 0, 0);
+            TimeSpan minTime = new TimeSpan(0, 30, 0);
+
+            if (string.IsNullOrEmpty(Convert.ToString(route.Cost)))
+                ModelState.AddModelError(nameof(route.Cost), "Вартість є пустою");
+
+            if (string.IsNullOrEmpty(Convert.ToString(route.Time)))
+                ModelState.AddModelError(nameof(route.Time), "Час проходження є пустим");
+
+            if (route.Cost < 10)
+                ModelState.AddModelError(nameof(route.Cost), "Вартість не може бути меншою за 10грн");
+
+            if (route.Cost > 1000)
+                ModelState.AddModelError(nameof(route.Cost), "Вартість не може бути більшою за 1000грн");
+
+            if (route.Time < minTime)
+                ModelState.AddModelError(nameof(route.Time), "Час проходження не може бути меншим за 30 хвилин");
+
+            if (route.Time > maxTime)
+                ModelState.AddModelError(nameof(route.Time), "Час проходження не може бути більшим за 5 днів");
+
+            if (!ModelState.IsValid)
+            {
+                TempData["error"] = "Інформація про маршрут не була відредагована";
+                return View(route);
+            }
+
+            _unitOfWork.Route.Update(route);
+            _unitOfWork.Save();
+
+            TempData["success"] = "Інформація про маршрут успішно відредагована";
             return RedirectToAction("Index");
         }
     }
