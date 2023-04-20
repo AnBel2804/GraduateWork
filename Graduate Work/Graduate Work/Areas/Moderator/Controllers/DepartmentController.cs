@@ -109,5 +109,22 @@ namespace Graduate_Work.Areas.Moderator.Controllers
             }
             return View(department);
         }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var departmentFromDbFirst = _unitOfWork.Department.GetFirstOrDefault(u => u.DepartmentId == id);
+            if (departmentFromDbFirst == null)
+            {
+                return NotFound();
+            }
+            _unitOfWork.Department.Remove(departmentFromDbFirst);
+            _unitOfWork.Save();
+            TempData["success"] = "Відділення успішно видалено";
+            return RedirectToAction("Index");
+        }
     }
 }
