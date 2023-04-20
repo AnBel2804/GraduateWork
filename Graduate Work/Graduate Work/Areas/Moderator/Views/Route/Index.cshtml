@@ -28,16 +28,16 @@
                 <div class="row p-2">
                     <div class="col-12 p-1" style="border:1px solid #008cba; border-radius: 5px;">
                         <div class="card-body">
-                            <div class="pl-1">
-                                <p class="card-title h5 text-primary text-dark">Відділення відправлення</p>
-                                <p class="card-title"><b style="word-wrap:break-word;">@item.Departments.First()</b></p>
+                            <div class="pl-1 route-departments-location">
+                                <p class="card-title h5 text-primary text-dark">Від. відпр.</p>
+                                <p class="card-title h5 text-primary text-dark">Від. приб.</p>
+                                @foreach (var departments in item.Departments)
+                                {
+                                    <p class="card-title"><b style="word-wrap:break-word;">@departments.NumberOfDepartment</b></p>
+                                }
                             </div>
                             <div class="pl-1">
-                                <p class="card-title h5 text-primary text-dark">Відділення прибуття</p>
-                                <p class="card-title"><b style="word-wrap:break-word;">@item.Departments.Last()</b></p>
-                            </div>
-                            <div class="pl-1">
-                                <p class="card-title h5 text-primary text-dark">Час проходження маршруту</p>
+                                <p class="card-title h5 text-primary text-dark">Час проходження</p>
                                 <p class="card-title"><b style="word-wrap:break-word;">@item.Time</b></p>
                             </div>
                             <div class="pl-1">

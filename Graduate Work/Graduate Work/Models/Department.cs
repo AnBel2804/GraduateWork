@@ -15,5 +15,11 @@ namespace Graduate_Work.Models
         [Required(ErrorMessage = "Номер відділення є пустим")]
         [Display(Name = "Номер відділення")]
         public int NumberOfDepartment { get; set; }
+        [ValidateNever]
+        public ICollection<Route> Routes { get; set; }
+        public Department()
+        {
+            Routes = new List<Route>();
+        }
     }
 }

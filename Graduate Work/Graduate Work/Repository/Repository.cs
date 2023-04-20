@@ -21,20 +21,35 @@ namespace Graduate_Work.Repository
             dbSet.Add(item);
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>> paramFilter = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>> paramFilter = null, params string[] prop)
         {
             IQueryable<T> query = dbSet;
             if (paramFilter != null)
             {
                 query = query.Where(paramFilter);
             }
+            if (prop != null)
+            {
+                foreach (string propValue in prop)
+                {
+                    query = query.Include(propValue);
+                }
+            }
+
             return query.ToList();
         }
 
-        public T GetFirstOrDefault(Expression<Func<T, bool>> paramFilter)
+        public T GetFirstOrDefault(Expression<Func<T, bool>> paramFilter, params string[] prop)
         {
             IQueryable<T> query = dbSet;
             query = query.Where(paramFilter);
+            if (prop != null)
+            {
+                foreach (string propValue in prop)
+                {
+                    query = query.Include(propValue);
+                }
+            }
             return query.FirstOrDefault();
         }
 

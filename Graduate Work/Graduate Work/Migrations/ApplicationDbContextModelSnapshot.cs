@@ -22,6 +22,21 @@ namespace Graduate_Work.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("DepartmentRoute", b =>
+                {
+                    b.Property<int>("DepartmentsDepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoutesRouteId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DepartmentsDepartmentId", "RoutesRouteId");
+
+                    b.HasIndex("RoutesRouteId");
+
+                    b.ToTable("DepartmentRoute");
+                });
+
             modelBuilder.Entity("Graduate_Work.Models.Customer", b =>
                 {
                     b.Property<int>("CustomerId")
@@ -64,12 +79,7 @@ namespace Graduate_Work.Migrations
                     b.Property<int>("NumberOfDepartment")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RouteId")
-                        .HasColumnType("int");
-
                     b.HasKey("DepartmentId");
-
-                    b.HasIndex("RouteId");
 
                     b.ToTable("Departments");
                 });
@@ -168,8 +178,8 @@ namespace Graduate_Work.Migrations
                     b.Property<double>("Cost")
                         .HasColumnType("float");
 
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan>("Time")
+                        .HasColumnType("time");
 
                     b.HasKey("RouteId");
 
@@ -397,6 +407,21 @@ namespace Graduate_Work.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("DepartmentRoute", b =>
+                {
+                    b.HasOne("Graduate_Work.Models.Department", null)
+                        .WithMany()
+                        .HasForeignKey("DepartmentsDepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Graduate_Work.Models.Route", null)
+                        .WithMany()
+                        .HasForeignKey("RoutesRouteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Graduate_Work.Models.Customer", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
@@ -406,13 +431,6 @@ namespace Graduate_Work.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Graduate_Work.Models.Department", b =>
-                {
-                    b.HasOne("Graduate_Work.Models.Route", null)
-                        .WithMany("Departments")
-                        .HasForeignKey("RouteId");
                 });
 
             modelBuilder.Entity("Graduate_Work.Models.Package", b =>
@@ -529,11 +547,6 @@ namespace Graduate_Work.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Graduate_Work.Models.Route", b =>
-                {
-                    b.Navigation("Departments");
                 });
 #pragma warning restore 612, 618
         }

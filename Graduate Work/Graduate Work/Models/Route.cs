@@ -17,7 +17,7 @@ namespace Graduate_Work.Models
         public double Cost { get; set; }
         [BindProperty, Display(Name = "Час проходження")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]
-        public DateTime Time { get; set; }
+        public TimeSpan Time { get; set; }
         public Route()
         {
             Departments = new List<Department>();
