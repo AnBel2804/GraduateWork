@@ -13,7 +13,7 @@ namespace Graduate_Work.Repository
         public IPackageTypeRepository PackageType { get; private set; }
         public ISenderInfoRepository SenderInfo { get; private set; }
         public IReciverInfoRepository ReciverInfo { get; private set; }
-        public IRouteRepository RouteRepository { get; private set; }
+        public IRouteRepository Route { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -25,7 +25,7 @@ namespace Graduate_Work.Repository
             PackageType = new PackageTypeRepository(_db);
             SenderInfo = new SenderInfoRepository(_db);
             ReciverInfo = new ReciverInfoRepository(_db);
-            RouteRepository = new RouteRepository(_db);
+            Route = new RouteRepository(_db);
         }
 
         public void Save()

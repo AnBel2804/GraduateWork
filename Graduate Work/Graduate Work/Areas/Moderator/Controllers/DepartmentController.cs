@@ -24,10 +24,22 @@ namespace Graduate_Work.Areas.Moderator.Controllers
             var departments = _unitOfWork.Department.GetAll();
             return View(departments);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Index(string? SearchString)
+        {
+            var departments = _unitOfWork.Department.GetAll();
+            ViewData["SearchString"] = SearchString;
+            if (!String.IsNullOrEmpty(SearchString))
+                departments = departments.Where(c => c.City == SearchString);
+            return View(departments);
+        }
+
         public IActionResult Add()
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Add(Department department)

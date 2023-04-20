@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Route>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-black text-primary"> Доступні маршрути</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Route" asp-action="Add" class="btn btn-outline-dark"> &nbsp; Додати новий маршрут</a>
+        </div>
+    </div>
+    <br />
+    <div class="item searchbar-location">
+        <div></div>
+        <form method="get" asp-area="Moderator" asp-controller="Route" asp-action="Index" class="d-flex text-center">
+            <input class="form-control me-sm-2 search-string" type="search" placeholder="Введіть номер відділення" value="@ViewData["SearchString"]" name="SearchString">
+            <button class="btn btn-success my-2 my-sm-0 search-button" type="submit">Пошук</button>
+            <a asp-controller="Route" asp-action="Index" class="btn btn-light search-button" style="margin-left:1em">Всі маршрути</a>
+        </form><div></div>
+    </div>
+    <div class="row pb-3">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-6">
+                <div class="row p-2">
+                    <div class="col-12 p-1" style="border:1px solid #008cba; border-radius: 5px;">
+                        <div class="card-body">
+                            <div class="pl-1">
+                                <p class="card-title h5 text-primary text-dark">Відділення відправлення</p>
+                                <p class="card-title"><b style="word-wrap:break-word;">@item.Departments.First()</b></p>
+                            </div>
+                            <div class="pl-1">
+                                <p class="card-title h5 text-primary text-dark">Відділення прибуття</p>
+                                <p class="card-title"><b style="word-wrap:break-word;">@item.Departments.Last()</b></p>
+                            </div>
+                            <div class="pl-1">
+                                <p class="card-title h5 text-primary text-dark">Час проходження маршруту</p>
+                                <p class="card-title"><b style="word-wrap:break-word;">@item.Time</b></p>
+                            </div>
+                            <div class="pl-1">
+                                <p class="card-title h5 text-primary text-dark">Вартість доставки</p>
+                                <p class="card-title"><b style="word-wrap:break-word;">@item.Cost</b></p>
+                            </div>
+                            <div style="display:flex;justify-content:center">
+                                <a asp-controller="Route" asp-action="Update" asp-route-id="@item.RouteId"
+                               class="btn btn-outline-secondary form-control">Редагувати</a>
+                                &nbsp;<a asp-controller="Route" asp-action="Delete" asp-route-id="@item.RouteId"
+                                     class="btn btn-outline-danger form-control">Видалити</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

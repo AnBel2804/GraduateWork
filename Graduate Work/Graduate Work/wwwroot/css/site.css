@@ -80,3 +80,18 @@ body {
     font-style: normal;
     font-size: 140%;
 }
+
+.searchbar-location {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 0.5fr;
+}
+
+.search-string {
+    width: 60%;
+    height: 100%;
+}
+
+.search-button {
+    height: 100%;
+    font-size: 90%;
+}

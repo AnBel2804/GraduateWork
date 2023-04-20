@@ -9,7 +9,7 @@
         IPackageTypeRepository PackageType { get; }
         ISenderInfoRepository SenderInfo { get; }
         IReciverInfoRepository ReciverInfo { get; }
-        IRouteRepository RouteRepository { get; }
+        IRouteRepository Route { get; }
         void Save();
     }
 }
