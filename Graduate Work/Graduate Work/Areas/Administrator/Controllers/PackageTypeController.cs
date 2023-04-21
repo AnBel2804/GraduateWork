@@ -105,5 +105,22 @@ namespace Graduate_Work.Areas.Administrator.Controllers
             TempData["error"] = "Новий тип не було відредаговано";
             return View(packageType);
         }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var packageTypesFromDbFirst = _unitOfWork.PackageType.GetFirstOrDefault(u => u.PackageTypeId == id);
+            if (packageTypesFromDbFirst == null)
+            {
+                return NotFound();
+            }
+            _unitOfWork.PackageType.Remove(packageTypesFromDbFirst);
+            _unitOfWork.Save();
+            TempData["success"] = "Відділення успішно видалено";
+            return RedirectToAction("Index");
+        }
     }
 }
