@@ -28,12 +28,15 @@ namespace Graduate_Work.Areas.Moderator.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(string? SearchString)
         {
-            var departments = _unitOfWork.Route.GetAll(null, "Departments");
+            var routes = _unitOfWork.Route.GetAll(null, "Departments");
             ViewData["SearchString"] = SearchString;
+            var searchRoutes = new List<Models.Route>();
             if (!String.IsNullOrEmpty(SearchString))
-                departments = departments.Where(c => c.Departments.First().NumberOfDepartment == int.Parse(SearchString)
-                                                && c.Departments.Last().NumberOfDepartment == int.Parse(SearchString));
-            return View(departments);
+                foreach (var route in routes)
+                    foreach(var department in route.Departments)
+                        if (department.NumberOfDepartment == int.Parse(SearchString))
+                            searchRoutes.Add(route);
+            return View(searchRoutes);
         }
 
         public IActionResult Add()
