@@ -32,11 +32,14 @@ namespace Graduate_Work.Areas.Moderator.Controllers
             ViewData["SearchString"] = SearchString;
             var searchRoutes = new List<Models.Route>();
             if (!String.IsNullOrEmpty(SearchString))
+            {
                 foreach (var route in routes)
-                    foreach(var department in route.Departments)
+                    foreach (var department in route.Departments)
                         if (department.NumberOfDepartment == int.Parse(SearchString))
                             searchRoutes.Add(route);
-            return View(searchRoutes);
+                return View(searchRoutes);
+            }
+            return View(routes);
         }
 
         public IActionResult Add()
@@ -162,6 +165,23 @@ namespace Graduate_Work.Areas.Moderator.Controllers
             _unitOfWork.Save();
 
             TempData["success"] = "Інформація про маршрут успішно відредагована";
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var routeFromDbFirst = _unitOfWork.Route.GetFirstOrDefault(c => c.RouteId == id);
+            if (routeFromDbFirst == null)
+            {
+                return NotFound();
+            }
+            _unitOfWork.Route.Remove(routeFromDbFirst);
+            _unitOfWork.Save();
+            TempData["success"] = "Маршрут успішно видалено";
             return RedirectToAction("Index");
         }
     }
