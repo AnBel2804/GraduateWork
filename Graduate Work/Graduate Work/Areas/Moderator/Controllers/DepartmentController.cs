@@ -99,20 +99,6 @@ namespace Graduate_Work.Areas.Moderator.Controllers
             if (string.IsNullOrEmpty(department.City))
                 ModelState.AddModelError(nameof(department.City), "Назва міста не може бути пустою");
 
-            //if (string.IsNullOrEmpty(department.NumberOfDepartment.ToString()))
-            //    ModelState.AddModelError(nameof(department.NumberOfDepartment), "Номер відділення не може бути пустим");
-
-            //if (!string.IsNullOrEmpty(department.NumberOfDepartment.ToString()))
-            //    if (department.NumberOfDepartment < 1)
-            //        ModelState.AddModelError(nameof(department.NumberOfDepartment), "Номер відділення не може бути меншим за 1");
-
-            //if (!string.IsNullOrEmpty(department.City))
-            //{
-            //    if (_unitOfWork.Department.GetAll(c => c.City == department.City).Where(c => c.NumberOfDepartment == department.NumberOfDepartment 
-            //                                    && c.DepartmentId != department.DepartmentId).Count() > 0)
-            //        ModelState.AddModelError(nameof(department.NumberOfDepartment), "В цьому місті вже існує таке відділення");
-            //}
-
             if (ModelState.IsValid)
             {
                 _unitOfWork.Department.Update(department);

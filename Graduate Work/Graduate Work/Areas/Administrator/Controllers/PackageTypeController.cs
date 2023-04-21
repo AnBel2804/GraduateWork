@@ -3,6 +3,7 @@ using Graduate_Work.Repository.IRepository;
 using Graduate_Work.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Packaging.Core;
 
 namespace Graduate_Work.Areas.Administrator.Controllers
 {
@@ -40,7 +41,7 @@ namespace Graduate_Work.Areas.Administrator.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Add(PackageType packageType)
+        public IActionResult Add(Models.PackageType packageType)
         {
             if (string.IsNullOrEmpty(packageType.NameOfType))
                 ModelState.AddModelError(nameof(packageType.NameOfType), "Назва типу є пустою");
@@ -65,6 +66,43 @@ namespace Graduate_Work.Areas.Administrator.Controllers
                 return RedirectToAction("Index");
             }
             TempData["error"] = "Новий тип не було додано";
+            return View(packageType);
+        }
+
+        public IActionResult Update(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var packageTypesFromDbFirst = _unitOfWork.PackageType.GetFirstOrDefault(u => u.PackageTypeId == id);
+            if (packageTypesFromDbFirst == null)
+            {
+                return NotFound();
+            }
+
+            return View(packageTypesFromDbFirst);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(Models.PackageType packageType)
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(packageType.InterestRate)))
+                ModelState.AddModelError(nameof(packageType.InterestRate), "Відсоткова ставка є пустою");
+
+            if (!string.IsNullOrEmpty(Convert.ToString(packageType.InterestRate)) && packageType.InterestRate < 0)
+                ModelState.AddModelError(nameof(packageType.InterestRate), "Відсоткова ставка не може бути меншою за 0");
+
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.PackageType.Update(packageType);
+                _unitOfWork.Save();
+                TempData["success"] = "Новий тип успішно відредаговано";
+                return RedirectToAction("Index");
+            }
+            TempData["error"] = "Новий тип не було відредаговано";
             return View(packageType);
         }
     }

@@ -12,12 +12,12 @@
             </div>
             <hr style="color:whitesmoke" />
             <input asp-for="DepartmentId" hidden />
-            <input asp-for="NumberOfDepartment" hidden />
-            @*<div class="mb-3" style="width:350px">
+            <div class="mb-3" style="width:350px">
                 <label asp-for="NumberOfDepartment"></label>
-                <input asp-for="NumberOfDepartment" class="form-control " />
+                <input asp-for="NumberOfDepartment" disabled class="form-control " />
                 <span asp-validation-for="NumberOfDepartment" class="text-danger"></span>
-            </div>*@
+            </div>
+            <input asp-for="NumberOfDepartment" hidden />
             <div class="mb-3" style="width:350px">
                 <label asp-for="City"></label>
                 <input asp-for="City" class="form-control " />
