@@ -59,7 +59,7 @@ namespace Graduate_Work.DbInitializer
                 var resultAdminResponce = _userManager.CreateAsync(administrator, "0106Admin2023").GetAwaiter().GetResult();
                 if (resultAdminResponce.Succeeded)
                 {
-                    _userManager.AddToRoleAsync(moderator, Roles.Role_Administrator).GetAwaiter().GetResult();
+                    _userManager.AddToRoleAsync(administrator, Roles.Role_Administrator).GetAwaiter().GetResult();
                 }
             }
 
