@@ -137,7 +137,8 @@ namespace Graduate_Work.Migrations
 
                     b.Property<string>("NameOfType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.HasKey("PackageTypeId");
 

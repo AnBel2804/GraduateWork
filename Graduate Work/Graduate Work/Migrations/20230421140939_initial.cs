@@ -70,7 +70,7 @@ namespace Graduate_Work.Migrations
                 {
                     PackageTypeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NameOfType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NameOfType = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     InterestRate = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>

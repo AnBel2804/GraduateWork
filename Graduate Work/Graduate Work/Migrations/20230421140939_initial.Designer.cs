@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Graduate_Work.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230420190004_initial")]
+    [Migration("20230421140939_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -140,7 +140,8 @@ namespace Graduate_Work.Migrations
 
                     b.Property<string>("NameOfType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.HasKey("PackageTypeId");
 
