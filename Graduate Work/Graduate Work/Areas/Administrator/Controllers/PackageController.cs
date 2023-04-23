@@ -36,7 +36,7 @@ namespace Graduate_Work.Areas.Administrator.Controllers
             if (!String.IsNullOrEmpty(SearchString))
             {
                 foreach (var package in packages)
-                { 
+                {
                     if (package.TTN == SearchString)
                         searchPackages.Add(package);
                 }
@@ -114,8 +114,8 @@ namespace Graduate_Work.Areas.Administrator.Controllers
 
             Models.Route searchRoute = null;
             foreach (var route in routes)
-                if(route.Departments.First().NumberOfDepartment == generalNewPackageVM.SenderDepartmentId)
-                    if(route.Departments.Last().NumberOfDepartment == generalNewPackageVM.ReciverDepartmentId)
+                if (route.Departments.First().NumberOfDepartment == generalNewPackageVM.SenderDepartmentId)
+                    if (route.Departments.Last().NumberOfDepartment == generalNewPackageVM.ReciverDepartmentId)
                     {
                         searchRoute = route;
                         break;
@@ -152,7 +152,7 @@ namespace Graduate_Work.Areas.Administrator.Controllers
 
             var newPackage = new Package()
             {
-                TTN = Convert.ToString(rnd.Next(400000000,499999999)),
+                TTN = Convert.ToString(rnd.Next(400000000, 499999999)),
                 SenderInfo = newSenderInfo,
                 ReciverInfo = newReciverInfo,
                 PackageType = searchPackageType,
@@ -219,6 +219,45 @@ namespace Graduate_Work.Areas.Administrator.Controllers
             }
             TempData["error"] = "Статус посилки не було відредаговано";
             return View(package);
+        }
+
+        public IActionResult Details(int? id)
+        {
+            var searchPackage = _unitOfWork.Package.GetFirstOrDefault(c => 
+                    c.PackageId == id, "PackageType", "SenderInfo", "ReciverInfo");
+
+            var searchPackageType = _unitOfWork.PackageType.GetFirstOrDefault(c => 
+                    c.PackageTypeId == searchPackage.PackageType.PackageTypeId);
+
+            var searchSenderInfo = _unitOfWork.SenderInfo.GetFirstOrDefault(c => 
+                    c.SenderInfoId == searchPackage.SenderInfo.SenderInfoId, "Sender", "DepartmentOfSender");
+
+            var searchReciverInfo = _unitOfWork.ReciverInfo.GetFirstOrDefault(c => 
+                    c.ReciverInfoId == searchPackage.ReciverInfo.ReciverInfoId, "Reciver", "DepartmentOfReciver");
+
+            var searchSender = _unitOfWork.Customer.GetFirstOrDefault(c =>
+                    c.CustomerId == searchSenderInfo.Sender.CustomerId);
+
+            var searchReciver = _unitOfWork.Customer.GetFirstOrDefault(c =>
+                    c.CustomerId == searchReciverInfo.Reciver.CustomerId);
+
+            var searchDepartmentOfSender = _unitOfWork.Department.GetFirstOrDefault(c =>
+                    c.DepartmentId == searchSenderInfo.DepartmentOfSender.DepartmentId);
+
+            var searchDepartmentOfReciver = _unitOfWork.Department.GetFirstOrDefault(c =>
+                    c.DepartmentId == searchReciverInfo.DepartmentOfReciver.DepartmentId);
+
+            var ganeralInfo = new GaneralInfo()
+            {
+                Package = searchPackage,
+                PackageType = searchPackageType,
+                Sender = searchSender,
+                Reciver = searchReciver,
+                SenderDepartment = searchDepartmentOfSender,
+                ReciverDepartment = searchDepartmentOfReciver
+            };
+
+            return View(ganeralInfo);
         }
     }
 }

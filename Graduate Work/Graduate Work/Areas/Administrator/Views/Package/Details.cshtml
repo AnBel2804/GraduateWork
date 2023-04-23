@@ -1,0 +1,123 @@
+﻿@model GaneralInfo
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="info-block-location"><div></div>
+    <div class="card border-dark mb-3 p-3 mt-4" style="border: double;">
+        <div class="row pb-2 text-center">
+            <h2 class="text-black text-primary">Загальна інформація</h2>
+            <hr />
+        </div>
+        <div class="info-block-markup-location">
+            <div style="border-right: double;">
+                <div style="margin-right: 5px;">
+                    <h3 class="text-black text-primary" style="text-align: center;">Посилка</h3>
+                    <hr />
+                    <div class="mb-3">
+                        <p class="card-title h4 text-primary text-dark">ТТН</p>
+                        <p class="card-title h6"><b style="word-wrap:break-word;">@Model.Package.TTN</b></p>
+                    </div>
+                    <div class="mb-3">
+                        <p class="card-title h4 text-primary text-dark">Статус</p>
+                        <p class="card-title h6"><b style="word-wrap:break-word;">@Model.Package.Status</b></p>
+                    </div>
+                    <div class="mb-3">
+                        <p class="card-title h4 text-primary text-dark">Приблизний час прибуття</p>
+                        <p class="card-title h6"><b style="word-wrap:break-word;">@Model.Package.Time</b></p>
+                    </div>
+                    <div class="mb-3">
+                        <p class="card-title h4 text-primary text-dark">Вартість доставки</p>
+                        <p class="card-title h6"><b style="word-wrap:break-word;">@Model.Package.Cost грн</b></p>
+                    </div>
+                </div>
+            </div>
+            <div style="border-left: double;">
+                <div style="margin-left: 10px;">
+                    <h3 class="text-black text-primary" style="text-align: center;">Тип посилки</h3>
+                    <hr />
+                    <div class="mb-3">
+                        <p class="card-title h4 text-primary text-dark">Назва типу посилки</p>
+                        <p class="card-title h6"><b style="word-wrap:break-word;">@Model.PackageType.NameOfType</b></p>
+                    </div>
+                    <div class="mb-3">
+                        <p class="card-title h4 text-primary text-dark">Відсоткова ставка</p>
+                        <p class="card-title h6"><b style="word-wrap:break-word;">@Model.PackageType.InterestRate %</b></p>
+                    </div>
+                    <div class="mb-3">
+                        <p class="card-title h4 text-primary text-dark">Id типу посилки</p>
+                        <p class="card-title h6"><b style="word-wrap:break-word;">@Model.PackageType.PackageTypeId</b></p>
+                    </div>
+                </div>
+            </div>
+            <div style="border-right: double; border-top: double;">
+                <div style="margin-right: 5px; margin-top: 5px;">
+                    <div style="margin-right: 5px;">
+                        <h3 class="text-black text-primary" style="text-align: center;">Відправник</h3>
+                        <hr />
+                        <div class="mb-3">
+                            <p class="card-title h4 text-primary text-dark">Ім`я</p>
+                            <p class="card-title h6"><b style="word-wrap:break-word;">@Model.Sender.FirstName</b></p>
+                        </div>
+                        <div class="mb-3">
+                            <p class="card-title h4 text-primary text-dark">Прізвище</p>
+                            <p class="card-title h6"><b style="word-wrap:break-word;">@Model.Sender.LastName</b></p>
+                        </div>
+                        <div class="mb-3">
+                            <p class="card-title h4 text-primary text-dark">Номер телефону</p>
+                            <p class="card-title h6"><b style="word-wrap:break-word;">@Model.Sender.Phone</b></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="border-left: double; border-top: double;">
+                <div style="margin-left: 10px; margin-top: 5px;">
+                    <h3 class="text-black text-primary" style="text-align: center;">Отримувач</h3>
+                    <hr />
+                    <div class="mb-3">
+                        <p class="card-title h4 text-primary text-dark">Ім`я</p>
+                        <p class="card-title h6"><b style="word-wrap:break-word;">@Model.Reciver.FirstName</b></p>
+                    </div>
+                    <div class="mb-3">
+                        <p class="card-title h4 text-primary text-dark">Прізвище</p>
+                        <p class="card-title h6"><b style="word-wrap:break-word;">@Model.Reciver.LastName</b></p>
+                    </div>
+                    <div class="mb-3">
+                        <p class="card-title h4 text-primary text-dark">Номер телефону</p>
+                        <p class="card-title h6"><b style="word-wrap:break-word;">@Model.Reciver.Phone</b></p>
+                    </div>
+                </div>
+            </div>
+            <div style="border-right: double; border-top: double;">
+                <div style="margin-right: 5px; margin-top: 5px;">
+                    <div style="margin-right: 5px;">
+                        <h3 class="text-black text-primary" style="text-align: center;">Відділення відправлення</h3>
+                        <hr />
+                        <div class="mb-3">
+                            <p class="card-title h4 text-primary text-dark">Номер відділення</p>
+                            <p class="card-title h6"><b style="word-wrap:break-word;">@Model.SenderDepartment.NumberOfDepartment</b></p>
+                        </div>
+                        <div class="mb-3">
+                            <p class="card-title h4 text-primary text-dark">Місто</p>
+                            <p class="card-title h6"><b style="word-wrap:break-word;">@Model.SenderDepartment.City</b></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="border-left: double; border-top: double;">
+                <div style="margin-left: 10px; margin-top: 5px;">
+                    <h3 class="text-black text-primary" style="text-align: center;">Відділення отримання</h3>
+                    <hr />
+                    <div class="mb-3">
+                        <p class="card-title h4 text-primary text-dark">Номер відділення</p>
+                        <p class="card-title h6"><b style="word-wrap:break-word;">@Model.ReciverDepartment.NumberOfDepartment</b></p>
+                    </div>
+                    <div class="mb-3">
+                        <p class="card-title h4 text-primary text-dark">Місто</p>
+                        <p class="card-title h6"><b style="word-wrap:break-word;">@Model.ReciverDepartment.City</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><div></div>
+</div>
