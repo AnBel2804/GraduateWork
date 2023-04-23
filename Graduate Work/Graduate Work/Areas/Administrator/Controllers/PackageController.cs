@@ -35,9 +35,7 @@ namespace Graduate_Work.Areas.Administrator.Controllers
             {
                 foreach (var package in packages)
                 { 
-                    if (package.SenderInfo.Sender.User.UserName == SearchString)
-                        searchPackages.Add(package);
-                    if (package.ReciverInfo.Reciver.User.UserName == SearchString)
+                    if (package.TTN == SearchString)
                         searchPackages.Add(package);
                 }
                 return View(searchPackages);
