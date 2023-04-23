@@ -259,5 +259,30 @@ namespace Graduate_Work.Areas.Administrator.Controllers
 
             return View(ganeralInfo);
         }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var packageFromDbFirst = _unitOfWork.Package.GetFirstOrDefault(c =>
+                    c.PackageId == id, "SenderInfo", "ReciverInfo");
+
+            var senderInfoFromDbFirst = _unitOfWork.SenderInfo.GetFirstOrDefault(c =>
+                    c.SenderInfoId == packageFromDbFirst.SenderInfo.SenderInfoId);
+
+            var reciverInfoFromDbFirst = _unitOfWork.ReciverInfo.GetFirstOrDefault(c =>
+                    c.ReciverInfoId == packageFromDbFirst.ReciverInfo.ReciverInfoId);
+
+            _unitOfWork.Package.Remove(packageFromDbFirst);
+            _unitOfWork.SenderInfo.Remove(senderInfoFromDbFirst);
+            _unitOfWork.ReciverInfo.Remove(reciverInfoFromDbFirst);
+            _unitOfWork.Save();
+
+            TempData["success"] = "Посилку успішно видалено";
+            return RedirectToAction("Index");
+        }
     }
 }
