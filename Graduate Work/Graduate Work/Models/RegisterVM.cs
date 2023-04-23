@@ -20,9 +20,13 @@ namespace Graduate_Work.Models
         [MinLength(4, ErrorMessage = "Прізвище не може бути коротшим за 4 символи")]
         [DisplayName("Прізвище")]
         public string LastName { get; set; }
-        [Required(ErrorMessage = "E-mail є пустим"), EmailAddress] 
+        [Required(ErrorMessage = "E-mail є пустим")] 
+        [EmailAddress(ErrorMessage = "Невірний формат E-mail")] 
         [DisplayName("E-mail")]
         public string Email { get; set; }
+        [Required(ErrorMessage = "Номер телефону є пустим")]
+        [DisplayName("Номер телефону")]
+        public string PhoneNumber { get; set; }
         [Required(ErrorMessage = "Пароль є пустим")] 
         [MinLength(8, ErrorMessage = "Довжина паролю не може бути меншою 8 символів")] 
         [DisplayName("Пароль"), DataType(DataType.Password)]

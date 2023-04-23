@@ -75,6 +75,8 @@ namespace Graduate_Work.Areas.User.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM registerVM)
         {
+            var customers = _unitOfWork.Customer.GetAll();
+
             if (string.IsNullOrEmpty(registerVM.Login))
                 ModelState.AddModelError(nameof(registerVM.Login), "Логін є пустим");
 
@@ -86,6 +88,9 @@ namespace Graduate_Work.Areas.User.Controllers
 
             if (string.IsNullOrEmpty(registerVM.Email))
                 ModelState.AddModelError(nameof(registerVM.Email), "E-mail є пустим");
+
+            if (string.IsNullOrEmpty(registerVM.PhoneNumber))
+                ModelState.AddModelError(nameof(registerVM.PhoneNumber), "Номер телефону є пустим");
 
             if (string.IsNullOrEmpty(registerVM.Password))
                 ModelState.AddModelError(nameof(registerVM.Password), "Пароль є пустим");
@@ -117,7 +122,14 @@ namespace Graduate_Work.Areas.User.Controllers
             if (!string.IsNullOrEmpty(registerVM.Email) && !Regex.IsMatch(registerVM.Email, @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"))
                 ModelState.AddModelError(nameof(registerVM.Email), "Невірний формат E-mail");
 
+            if (!string.IsNullOrEmpty(registerVM.PhoneNumber) && !Regex.IsMatch(registerVM.PhoneNumber, @"^\+380\d{9}$"))
+                ModelState.AddModelError(nameof(registerVM.PhoneNumber), "Невірний формат номеру телефона");
+
+            if (customers.Count(c => c.Phone == registerVM.PhoneNumber) > 0)
+                ModelState.AddModelError(nameof(registerVM.PhoneNumber), "Користувач з таким номером телефону вже був зареєстрований");
+
             var user = await _userManager.FindByEmailAsync(registerVM.Email);
+
             if (!string.IsNullOrEmpty(registerVM.Email) && user != null)
                 ModelState.AddModelError(nameof(registerVM.Email), "Ця пошта вже використовується");
 
@@ -141,7 +153,8 @@ namespace Graduate_Work.Areas.User.Controllers
                 {
                     User = newUser,
                     FirstName = registerVM.FirstName,
-                    LastName = registerVM.LastName
+                    LastName = registerVM.LastName,
+                    Phone = registerVM.PhoneNumber
                 };
                 _unitOfWork.Customer.Add(customer);
                 _unitOfWork.Save();

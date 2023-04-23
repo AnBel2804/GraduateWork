@@ -1,0 +1,45 @@
+﻿@model GeneralNewPackageVM
+@{
+    ViewData["Title"] = "Add";
+}
+
+<div class="form-block-location">
+    <div></div>
+    <form asp-action="Add" method="post" style="width:400px">
+        <div class="card border-light mb-3 border p-3 mt-4">
+            <div class="row pb-2 text-center">
+                <h2 class="text-black text-primary">Нова посилка</h2>
+            </div>
+            <hr style="color:whitesmoke" />
+            <div class="mb-3" style="width:350px">
+                <label asp-for="SenderPhone"></label>
+                <input asp-for="SenderPhone" class="form-control " />
+                <span asp-validation-for="SenderPhone" class="text-danger"></span>
+            </div>
+            <div class="mb-3" style="width:350px">
+                <label asp-for="SenderDepartmentId"></label>
+                <input asp-for="SenderDepartmentId" class="form-control " />
+                <span asp-validation-for="SenderDepartmentId" class="text-danger"></span>
+            </div>
+            <div class="mb-3" style="width:350px">
+                <label asp-for="ReciverPhone"></label>
+                <input asp-for="ReciverPhone" class="form-control " />
+                <span asp-validation-for="ReciverPhone" class="text-danger"></span>
+            </div>
+            <div class="mb-3" style="width:350px">
+                <label asp-for="ReciverDepartmentId"></label>
+                <input asp-for="ReciverDepartmentId" class="form-control bg-light" />
+                <span asp-validation-for="ReciverDepartmentId" class="text-danger"></span>
+            </div>
+            <div class="mb-3" style="width:350px">
+                <label asp-for="PackageTypeName"></label>
+                <input asp-for="PackageTypeName" class="form-control bg-light" />
+                <span asp-validation-for="PackageTypeName" class="text-danger"></span>
+            </div>
+            <div class="form-group form-block-buttons-location">
+                <a class="btn  btn-outline-secondary" style="width:90%" asp-controller="Package" asp-action="Index">Назад</a>
+                <button type="submit" class="btn btn-primary" style="width:95%; text-align:center;">Додати</button>
+            </div>
+        </div>
+    </form>
+</div>
