@@ -11,6 +11,7 @@ namespace Graduate_Work.Models
     {
         [Key]
         public int PackageId { get; set; }
+        public string TTN { get; set; }
         [ForeignKey("SenderInfoId")]
         [ValidateNever]
         public SenderInfo SenderInfo { get; set; }

@@ -206,6 +206,7 @@ namespace Graduate_Work.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -301,6 +302,7 @@ namespace Graduate_Work.Migrations
                 {
                     PackageId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    TTN = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SenderInfoId = table.Column<int>(type: "int", nullable: false),
                     ReciverInfoId = table.Column<int>(type: "int", nullable: false),
                     PackageTypeID = table.Column<int>(type: "int", nullable: false),

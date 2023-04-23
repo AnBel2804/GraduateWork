@@ -148,8 +148,11 @@ namespace Graduate_Work.Areas.Administrator.Controllers
 
             var searchPackageType = _unitOfWork.PackageType.GetFirstOrDefault(c => c.NameOfType == generalNewPackageVM.PackageTypeName);
 
+            Random rnd = new Random();
+
             var newPackage = new Package()
             {
+                TTN = Convert.ToString(rnd.Next(400000000,499999999)),
                 SenderInfo = newSenderInfo,
                 ReciverInfo = newReciverInfo,
                 PackageType = searchPackageType,

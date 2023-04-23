@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Graduate_Work.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230423060027_second")]
-    partial class second
+    [Migration("20230423105617_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,6 +112,10 @@ namespace Graduate_Work.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TTN")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
