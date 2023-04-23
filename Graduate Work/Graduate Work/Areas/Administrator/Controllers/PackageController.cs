@@ -3,6 +3,8 @@ using Graduate_Work.Repository.IRepository;
 using Graduate_Work.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using NuGet.Packaging.Core;
 using System.Text.RegularExpressions;
 
@@ -164,6 +166,59 @@ namespace Graduate_Work.Areas.Administrator.Controllers
 
             TempData["success"] = "Нову посилку успішно створено";
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Update(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var packageFromDbFirst = _unitOfWork.Package.GetFirstOrDefault(c => c.PackageId == id);
+            if (packageFromDbFirst == null)
+            {
+                return NotFound();
+            }
+
+            if (packageFromDbFirst.Status == Statuses.Status_Sent || packageFromDbFirst.Status == Statuses.Status_Await)
+            {
+                var statusList = new SelectList(
+                new List<SelectListItem>
+                {
+                    new SelectListItem { Text = $"{Statuses.Status_Sent}", Value = Statuses.Status_Sent},
+                    new SelectListItem { Text = $"{Statuses.Status_Arrived}", Value = Statuses.Status_Arrived},
+                    new SelectListItem { Text = $"{Statuses.Status_Received}", Value = Statuses.Status_Received}
+                }, "Value", "Text");
+                ViewBag.StatusList = statusList;
+            }
+            if (packageFromDbFirst.Status == Statuses.Status_Arrived)
+            {
+                var statusList = new SelectList(
+                new List<SelectListItem>
+                {
+                    new SelectListItem { Text = $"{Statuses.Status_Arrived}", Value = Statuses.Status_Arrived},
+                    new SelectListItem { Text = $"{Statuses.Status_Received}", Value = Statuses.Status_Received}
+                }, "Value", "Text");
+                ViewBag.StatusList = statusList;
+            }
+
+            return View(packageFromDbFirst);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(Package package)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Package.Update(package);
+                _unitOfWork.Save();
+                TempData["success"] = "Статус посилки успішно відредаговано";
+                return RedirectToAction("Index");
+            }
+            TempData["error"] = "Статус посилки не було відредаговано";
+            return View(package);
         }
     }
 }

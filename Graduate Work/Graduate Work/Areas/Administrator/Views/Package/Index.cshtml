@@ -32,24 +32,44 @@
                                 <p class="card-title h5 text-primary text-dark">ТТН</p>
                                 <p class="card-title"><b style="word-wrap:break-word;">@item.TTN</b></p>
                             </div>
+                            <div style="display:flex;justify-content:center">
+                                <a asp-controller="Package" asp-action="Details" asp-route-id="@item.PackageId"
+                               class="btn btn-outline-info form-control">Детальніше</a>
+                            </div><br>
                             <div class="pl-1">
                                 <p class="card-title h5 text-primary text-dark">Статус</p>
                                 <p class="card-title"><b style="word-wrap:break-word;">@item.Status</b></p>
                             </div>
-                            <div class="pl-1">
-                                <p class="card-title h5 text-primary text-dark">Приблизний час прибуття</p>
-                                <p class="card-title"><b style="word-wrap:break-word;">@item.Time</b></p>
-                            </div>
-                            <div class="pl-1">
-                                <p class="card-title h5 text-primary text-dark">Вартість доставки</p>
-                                <p class="card-title"><b style="word-wrap:break-word;">@item.Cost</b></p>
-                            </div>
-                            <div style="display:flex;justify-content:center">
-                                <a asp-controller="Package" asp-action="Update" asp-route-id="@item.PackageId"
+                            @if (item.Status == Statuses.Status_Arrived || item.Status == Statuses.Status_Sent)
+                            {
+                                @if (item.Status == Statuses.Status_Sent)
+                                {
+                                    <div class="pl-1">
+                                        <p class="card-title h5 text-primary text-dark">Приблизний час прибуття</p>
+                                        <p class="card-title"><b style="word-wrap:break-word;">@item.Time</b></p>
+                                    </div>
+                                }
+                                <div class="pl-1">
+                                    <p class="card-title h5 text-primary text-dark">Вартість доставки</p>
+                                    <p class="card-title"><b style="word-wrap:break-word;">@item.Cost</b></p>
+                                </div>
+                            }
+                            @if (item.Status != Statuses.Status_Received)
+                            {
+                                <div style="display:flex;justify-content:center">
+                                    <a asp-controller="Package" asp-action="Update" asp-route-id="@item.PackageId"
                                class="btn btn-outline-secondary form-control">Редагувати</a>
-                                &nbsp;<a asp-controller="Package" asp-action="Delete" asp-route-id="@item.PackageId"
+                                    &nbsp;<a asp-controller="Package" asp-action="Delete" asp-route-id="@item.PackageId"
                                      class="btn btn-outline-danger form-control">Видалити</a>
-                            </div>
+                                </div>
+                            }
+                            @if (item.Status == Statuses.Status_Received)
+                            {
+                                <div style="display:flex;justify-content:center">
+                                    <a asp-controller="Package" asp-action="Delete" asp-route-id="@item.PackageId"
+                                     class="btn btn-outline-danger form-control">Видалити</a>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
