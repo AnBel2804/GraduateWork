@@ -1,6 +1,8 @@
-﻿using Graduate_Work.Utility;
+﻿using Graduate_Work.Repository.IRepository;
+using Graduate_Work.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Graduate_Work.Areas.Customer.Controllers
 {
@@ -8,9 +10,22 @@ namespace Graduate_Work.Areas.Customer.Controllers
     [Authorize(Roles = Roles.Role_Customer)]
     public class UserController : Controller
     {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public UserController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            var customer = _unitOfWork.Customer.GetFirstOrDefault(c =>
+                    c.User.Id == claim.Value, "User");
+
+            return View(customer);
         }
     }
 }

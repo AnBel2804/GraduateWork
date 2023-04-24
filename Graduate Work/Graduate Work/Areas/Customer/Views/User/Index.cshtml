@@ -1,0 +1,38 @@
+﻿@model Customer
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="info-block-location">
+    <div></div>
+    <div class="card border-dark mb-3 p-3 mt-4" style="border: double;">
+        <div class="row pb-2 text-center">
+            <h2 class="text-black text-primary">Особистий кабінет</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <p class="card-title h4 text-primary text-dark">Ім`я</p>
+            <p class="card-title h6"><b style="word-wrap:break-word;">@Model.FirstName</b></p>
+        </div>
+        <div class="mb-3">
+            <p class="card-title h4 text-primary text-dark">Прізвище</p>
+            <p class="card-title h6"><b style="word-wrap:break-word;">@Model.LastName</b></p>
+        </div>
+        <div class="mb-3">
+            <p class="card-title h4 text-primary text-dark">Номер телефону</p>
+            <p class="card-title h6"><b style="word-wrap:break-word;">@Model.Phone</b></p>
+        </div>
+        <div class="mb-3">
+            <p class="card-title h4 text-primary text-dark">E-mail</p>
+            <p class="card-title h6"><b style="word-wrap:break-word;">@Model.User.Email</b></p>
+        </div>
+        <div class="mb-3">
+            <p class="card-title h4 text-primary text-dark">Персональний Id клієнта</p>
+            <p class="card-title h6"><b style="word-wrap:break-word;">@Model.CustomerId</b></p>
+        </div>
+        <div style="display:flex; justify-content: right; border-top: double;">
+            <a asp-controller="Customer" asp-action="Update" asp-route-id="@Model.CustomerId"
+               class="btn btn-outline-info form-control" style="justify-content: right; max-width: 400px; margin-top: 10px;">Редагувати інформацію</a>
+        </div>
+    </div><div></div>
+</div>
