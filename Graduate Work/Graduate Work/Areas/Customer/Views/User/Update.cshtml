@@ -1,0 +1,38 @@
+﻿@model Customer
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="form-block-location">
+    <div></div>
+    <form asp-action="Update" method="post" style="width:400px">
+        <div class="card border-light mb-3 border p-3 mt-4">
+            <div class="row pb-2 text-center">
+                <h2 class="text-black text-primary">Редагування інформації про користувача</h2>
+            </div>
+            <hr style="color:whitesmoke" />
+            <input asp-for="CustomerId" hidden />
+            <input asp-for="User" hidden />
+            <div class="mb-3">
+                <label asp-for="FirstName">Ім`я</label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="LastName">Прізвище</label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Phone">Назва завдання</label>
+                <input asp-for="Phone" disabled class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <input asp-for="Phone" hidden />
+            <div class="form-group form-block-buttons-location">
+                <a class="btn  btn-outline-secondary" style="width:90%" asp-controller="User" asp-action="Index">Назад</a>
+                <button type="submit" class="btn btn-primary" style="width:95%; text-align:center;">Зберегти зміни</button>
+            </div>
+        </div>
+    </form><div></div>
+</div>
