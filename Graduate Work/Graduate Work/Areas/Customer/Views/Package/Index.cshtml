@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Package>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-black text-primary"> Посилки</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Package" asp-action="Add" class="btn btn-outline-dark"> &nbsp; Додати нову посилку</a>
+        </div>
+    </div>
+    <br />
+    <div class="item searchbar-location">
+        <div></div>
+        <form method="get" asp-area="Customer" asp-controller="Package" asp-action="Index" class="d-flex text-center">
+            <input class="form-control me-sm-2 search-string" type="search" placeholder="Введіть ТТН посилки" value="@ViewData["SearchString"]" name="SearchString">
+            <button class="btn btn-success my-2 my-sm-0 search-button" type="submit">Пошук</button>
+            <a asp-controller="Package" asp-action="Index" class="btn btn-light search-button" style="margin-left:1em">Всі посилки</a>
+        </form><div></div>
+    </div>
+    <div class="row pb-3">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-6">
+                <div class="row p-2">
+                    <div class="col-12 p-1" style="border:1px solid #008cba; border-radius: 5px;">
+                        <div class="card-body">
+                            <div class="pl-1">
+                                <p class="card-title h5 text-primary text-dark">ТТН</p>
+                                <p class="card-title"><b style="word-wrap:break-word;">@item.TTN</b></p>
+                            </div>
+                            <div style="display:flex;justify-content:center">
+                                <a asp-controller="Package" asp-action="Details" asp-route-id="@item.PackageId"
+                               class="btn btn-outline-info form-control">Детальніше</a>
+                            </div><br>
+                            <div class="pl-1">
+                                <p class="card-title h5 text-primary text-dark">Статус</p>
+                                <p class="card-title"><b style="word-wrap:break-word;">@item.Status</b></p>
+                            </div>
+                            @if (item.Status == Statuses.Status_Arrived || item.Status == Statuses.Status_Sent)
+                            {
+                                @if (item.Status == Statuses.Status_Sent)
+                                {
+                                    <div class="pl-1">
+                                        <p class="card-title h5 text-primary text-dark">Приблизний час прибуття</p>
+                                        <p class="card-title"><b style="word-wrap:break-word;">@item.Time</b></p>
+                                    </div>
+                                }
+                                <div class="pl-1">
+                                    <p class="card-title h5 text-primary text-dark">Вартість доставки</p>
+                                    <p class="card-title"><b style="word-wrap:break-word;">@item.Cost</b></p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
