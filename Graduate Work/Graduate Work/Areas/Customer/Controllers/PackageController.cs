@@ -70,5 +70,44 @@ namespace Graduate_Work.Areas.Customer.Controllers
 
             return View(packagesOfUser);
         }
+
+        public IActionResult Details(int? id)
+        {
+            var searchPackage = _unitOfWork.Package.GetFirstOrDefault(c =>
+                    c.PackageId == id, "PackageType", "SenderInfo", "ReciverInfo");
+
+            var searchPackageType = _unitOfWork.PackageType.GetFirstOrDefault(c =>
+                    c.PackageTypeId == searchPackage.PackageType.PackageTypeId);
+
+            var searchSenderInfo = _unitOfWork.SenderInfo.GetFirstOrDefault(c =>
+                    c.SenderInfoId == searchPackage.SenderInfo.SenderInfoId, "Sender", "DepartmentOfSender");
+
+            var searchReciverInfo = _unitOfWork.ReciverInfo.GetFirstOrDefault(c =>
+                    c.ReciverInfoId == searchPackage.ReciverInfo.ReciverInfoId, "Reciver", "DepartmentOfReciver");
+
+            var searchSender = _unitOfWork.Customer.GetFirstOrDefault(c =>
+                    c.CustomerId == searchSenderInfo.Sender.CustomerId);
+
+            var searchReciver = _unitOfWork.Customer.GetFirstOrDefault(c =>
+                    c.CustomerId == searchReciverInfo.Reciver.CustomerId);
+
+            var searchDepartmentOfSender = _unitOfWork.Department.GetFirstOrDefault(c =>
+                    c.DepartmentId == searchSenderInfo.DepartmentOfSender.DepartmentId);
+
+            var searchDepartmentOfReciver = _unitOfWork.Department.GetFirstOrDefault(c =>
+                    c.DepartmentId == searchReciverInfo.DepartmentOfReciver.DepartmentId);
+
+            var ganeralInfo = new GaneralInfo()
+            {
+                Package = searchPackage,
+                PackageType = searchPackageType,
+                Sender = searchSender,
+                Reciver = searchReciver,
+                SenderDepartment = searchDepartmentOfSender,
+                ReciverDepartment = searchDepartmentOfReciver
+            };
+
+            return View(ganeralInfo);
+        }
     }
 }
