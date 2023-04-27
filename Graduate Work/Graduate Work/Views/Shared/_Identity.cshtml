@@ -2,64 +2,89 @@
 @inject UserManager<IdentityUser> UserManager
 
 
-<ul class="navbar-nav">
-    @if (SignInManager.IsSignedIn(User))
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (User.IsInRole(Roles.Role_Administrator))
     {
-        @if (User.IsInRole(Roles.Role_Customer))
+        <a class="navbar-brand" style="color: red;" asp-area="" asp-controller="Home" asp-action="Index">Global Delivery Administrator</a>
+    }
+    @if (User.IsInRole(Roles.Role_Moderator))
+    {
+        <a class="navbar-brand" style="color: gold;" asp-area="" asp-controller="Home" asp-action="Index">Global Delivery Moderator</a>
+    }
+    @if (User.IsInRole(Roles.Role_Customer))
+    {
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Global Delivery</a>
+    }
+    
+}
+else
+{
+    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Global Delivery</a>
+}
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarColor03">
+    <ul class="navbar-nav">
+        @if (SignInManager.IsSignedIn(User))
         {
-            <li class="nav-item">
-                <label id="manage" class="nav-link text-dark" title="Task">Вітаю @UserManager.GetUserName(User) !</label>
-            </li>
-            <li class="nav-item">
-                <form id="infoForm" class="form-inline" asp-area="Customer" asp-controller="User" asp-action="Index">
-                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Кабінет</button>
-                </form>
-            </li>
-            <li class="nav-item">
-                <form id="infoForm" class="form-inline" asp-area="Customer" asp-controller="Package" asp-action="Index">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Посилки</button>
-                </form>
-            </li>
-        }
-        @if (User.IsInRole(Roles.Role_Moderator))
-        {
-            <li class="nav-item">
-                <form id="infoForm" class="form-inline" asp-area="Moderator" asp-controller="Department" asp-action="Index">
-                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Відділення</button>
-                </form>
-            </li>
-            <li class="nav-item">
-                <form id="infoForm" class="form-inline" asp-area="Moderator" asp-controller="Route" asp-action="Index">
-                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Маршрути</button>
-                </form>
-            </li>
-        }
-        @if (User.IsInRole(Roles.Role_Administrator))
-        {
-            <li class="nav-item">
-                <form id="infoForm" class="form-inline" asp-area="Administrator" asp-controller="PackageType" asp-action="Index">
-                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Типи посилок</button>
-                </form>
-            </li>
-            <li class="nav-item">
-                <form id="infoForm" class="form-inline" asp-area="Administrator" asp-controller="Package" asp-action="Index">
+            @if (User.IsInRole(Roles.Role_Customer))
+            {
+                <li class="nav-item">
+                    <label id="manage" class="nav-link text-dark" title="Task">Вітаю @UserManager.GetUserName(User)!</label>
+                </li>
+                <li class="nav-item">
+                    <form id="infoForm" class="form-inline" asp-area="Customer" asp-controller="User" asp-action="Index">
+                        <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Кабінет</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form id="infoForm" class="form-inline" asp-area="Customer" asp-controller="Package" asp-action="Index">
                     <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Посилки</button>
+                    </form>
+                </li>
+            }
+            @if (User.IsInRole(Roles.Role_Moderator))
+            {
+                <li class="nav-item">
+                    <form id="infoForm" class="form-inline" asp-area="Moderator" asp-controller="Department" asp-action="Index">
+                        <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Відділення</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form id="infoForm" class="form-inline" asp-area="Moderator" asp-controller="Route" asp-action="Index">
+                        <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Маршрути</button>
+                    </form>
+                </li>
+            }
+            @if (User.IsInRole(Roles.Role_Administrator))
+            {
+                <li class="nav-item">
+                    <form id="infoForm" class="form-inline" asp-area="Administrator" asp-controller="PackageType" asp-action="Index">
+                        <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Типи посилок</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form id="infoForm" class="form-inline" asp-area="Administrator" asp-controller="Package" asp-action="Index">
+                        <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Посилки</button>
+                    </form>
+                </li>
+            }
+            <li class="nav-item">
+                <form id="logoutForm" class="form-inline" asp-area="User" asp-controller="Account" asp-action="Logout">
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Вихід</button>
                 </form>
             </li>
         }
-        <li class="nav-item">
-            <form id="logoutForm" class="form-inline" asp-area="User" asp-controller="Account" asp-action="Logout">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Вихід</button>
-            </form>
-        </li>
-    }
-    else
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" id="register" asp-area="User" asp-controller="Account" asp-action="Register"> Реєстрація </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" id="login" asp-area="User" asp-controller="Account" asp-action="Login"> Увійти </a>
-        </li>
-    }
-</ul>
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" id="register" asp-area="User" asp-controller="Account" asp-action="Register"> Реєстрація </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" id="login" asp-area="User" asp-controller="Account" asp-action="Login"> Увійти </a>
+            </li>
+        }
+    </ul>
+</div>
