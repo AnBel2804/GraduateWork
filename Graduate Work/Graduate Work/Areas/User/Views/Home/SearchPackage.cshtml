@@ -1,0 +1,39 @@
+﻿@model Package
+@{
+    ViewData["Title"] = "SearchPackage";
+}
+
+<div class="info-block-location">
+    <div></div>
+    <div class="card border-dark mb-3 p-3 mt-4 shadow info-block-text" style="border: double;">
+        <div class="row pb-2 text-center">
+            <h2 class="text-black text-primary">Інформація про посилку</h2>
+        </div>
+        <div class="mb-3" style=" border-top: double;">
+            <p class="card-title h4 text-primary text-dark" style="margin-top: 10px;">ТТН</p>
+            <p class="card-title h6"><b style="word-wrap:break-word;">@Model.TTN</b></p>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <p class="card-title h4 text-primary text-dark">Статус</p>
+            <p class="card-title h6"><b style="word-wrap:break-word;">@Model.Status</b></p>
+            <hr />
+        </div>
+        @if (Model.Status == Statuses.Status_Sent || Model.Status == Statuses.Status_Arrived)
+        {
+            if (Model.Status == Statuses.Status_Sent)
+            {
+                <div class="mb-3">
+                    <p class="card-title h4 text-primary text-dark">Орієнтовна дата доставки</p>
+                <p class="card-title h6"><b style="word-wrap:break-word;">@Model.Time</b></p>
+                <hr />
+            </div>
+            }
+            <div class="mb-3">
+                <p class="card-title h4 text-primary text-dark">Вартість</p>
+            <p class="card-title h6"><b style="word-wrap:break-word;">@Model.Cost грн</b></p>
+            <hr />
+        </div>
+        }
+    </div><div></div>
+</div>

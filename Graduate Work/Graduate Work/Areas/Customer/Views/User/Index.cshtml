@@ -5,26 +5,29 @@
 
 <div class="info-block-location">
     <div></div>
-    <div class="card border-dark mb-3 p-3 mt-4" style="border: double;">
+    <div class="card border-dark mb-3 p-3 mt-4 shadow info-block-text" style="border: double;">
         <div class="row pb-2 text-center">
             <h2 class="text-black text-primary">Особистий кабінет</h2>
-            <hr />
         </div>
-        <div class="mb-3">
-            <p class="card-title h4 text-primary text-dark">Ім`я</p>
+        <div class="mb-3" style=" border-top: double;">
+            <p class="card-title h4 text-primary text-dark" style="margin-top: 10px;">Ім`я</p>
             <p class="card-title h6"><b style="word-wrap:break-word;">@Model.FirstName</b></p>
+            <hr />
         </div>
         <div class="mb-3">
             <p class="card-title h4 text-primary text-dark">Прізвище</p>
             <p class="card-title h6"><b style="word-wrap:break-word;">@Model.LastName</b></p>
+            <hr />
         </div>
         <div class="mb-3">
             <p class="card-title h4 text-primary text-dark">Номер телефону</p>
             <p class="card-title h6"><b style="word-wrap:break-word;">@Model.Phone</b></p>
+            <hr />
         </div>
         <div class="mb-3">
             <p class="card-title h4 text-primary text-dark">E-mail</p>
             <p class="card-title h6"><b style="word-wrap:break-word;">@Model.User.Email</b></p>
+            <hr />
         </div>
         <div class="mb-3">
             <p class="card-title h4 text-primary text-dark">Персональний Id клієнта</p>
