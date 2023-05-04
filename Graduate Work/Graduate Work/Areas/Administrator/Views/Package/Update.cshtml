@@ -8,7 +8,7 @@
     <form asp-action="Update" method="post" style="width:400px">
         <div class="card border-light mb-3 border p-3 mt-4">
             <div class="row pb-2 text-center">
-                <h2 class="text-black text-primary">Редагування маршруту</h2>
+                <h2 class="text-black text-primary">Редагування посилки</h2>
             </div>
             <hr style="color:whitesmoke" />
             <input asp-for="PackageId" hidden />
@@ -18,7 +18,7 @@
             <input asp-for="Time" hidden />
             <input asp-for="Cost" hidden />
             <div class="mb-3">
-                <label asp-for="TTN">Назва завдання</label>
+                <label asp-for="TTN">ТТН</label>
                 <input asp-for="TTN" disabled class="form-control" />
                 <span asp-validation-for="TTN" class="text-danger"></span>
             </div>
