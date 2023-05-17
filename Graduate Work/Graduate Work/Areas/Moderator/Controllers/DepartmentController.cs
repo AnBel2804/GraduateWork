@@ -58,13 +58,6 @@ namespace Graduate_Work.Areas.Moderator.Controllers
                 if (_unitOfWork.Department.GetAll().Count(c => c.NumberOfDepartment == department.NumberOfDepartment) > 0)
                     ModelState.AddModelError(nameof(department.NumberOfDepartment), "Вже існує таке відділення");
 
-            //if (!string.IsNullOrEmpty(department.City))
-            //{
-            //    IEnumerable<Department> departments_in_city = _unitOfWork.Department.GetAll(c => c.City == department.City);
-            //    if (departments_in_city.Count(c => c.NumberOfDepartment == department.NumberOfDepartment) > 0)
-            //        ModelState.AddModelError(nameof(department.NumberOfDepartment), "В цьому місті вже існує таке відділення");
-            //}
-
             if (ModelState.IsValid)
             {
                 _unitOfWork.Department.Add(department);
